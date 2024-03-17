@@ -209,3 +209,135 @@ class Test{
   }
 }
 ```
+
+## Inheritance
+
+- Inheritance is a mechanism that allows a new class to inherits all the properties and behaviors of the existing class, and can also add its own properties and behaviors.
+- We achive inheritance by using **extends** keyword.
+
+```java
+class Animal{// parent class or super class
+  void eat(){
+    System.out.println("I am eating");
+  }
+}
+class Dog extends Animaml{// child class or sub class
+  public static void main(String args[]){
+    Dog d = new Dog();
+    d.eat();
+  }
+}
+```
+
+Dog **Is A** Animal (**is a** relationship)
+
+**Advantages of Inheritance**
+
+- Code reusability.
+- It promotes runtime polymorphism by allowing method overriding.
+
+**Disadvantages of Inheritance**
+
+- Tight Coupling -: Inheritance can lead to tight coupling between classes, where changes in one class (especially in the superclass) can have unforeseen consequences on subclasses.
+
+### Types of Inheritance
+
+1. Single Inheritance - A class inherit from only one super class.
+
+```java
+class Animal {
+    void eat() {
+        System.out.println("Animal is eating");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog is barking");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.eat(); // Inherits from Animal class
+        dog.bark(); // Method defined in Dog class
+    }
+}
+```
+
+2. Multilevel Inheritance - In multilevel inheritance, a class inherits from another class, and that class, in turn, can act as a superclass for another class.
+
+```java
+// Example of Multilevel Inheritance
+class Animal {
+    void eat() {
+        System.out.println("Animal is eating");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog is barking");
+    }
+}
+
+class Puppy extends Dog {
+    void wagTail() {
+        System.out.println("Puppy is wagging its tail");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Puppy puppy = new Puppy();
+        puppy.eat(); // Inherits from Animal class
+        puppy.bark(); // Inherits from Dog class
+        puppy.wagTail(); // Method defined in Puppy class
+    }
+}
+```
+
+3. Hierarchical Inheritance: In hierarchical inheritance, multiple classes inherit from a single superclass.
+
+```java
+class Animal {
+    void eat() {
+        System.out.println("Animal is eating");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog is barking");
+    }
+}
+
+class Cat extends Animal {
+    void meow() {
+        System.out.println("Cat is meowing");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.eat(); // Inherits from Animal class
+        dog.bark(); // Method defined in Dog class
+
+        Cat cat = new Cat();
+        cat.eat(); // Inherits from Animal class
+        cat.meow(); // Method defined in Cat class
+    }
+}
+
+```
+
+**Important points of Inheritance**
+
+- There is no multiple inheritance and hybrid inheritance in java.
+- If any class doest not inherit any other class it will indirectly inherit Object class.
+- Object class is the parent class of all the class.
+- Below does not take part in inheritance.
+  - Constructors - A subclass inherit all the members(fields, method and nested class) from its super class. Constructors are not members so they are not inherited by subclasses, but the constructor of the super class can be invoked from the subclass.
+  - Private member - A sublcass does not inherit private member of its parent class.
