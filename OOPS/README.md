@@ -139,3 +139,73 @@ class Animal{
      }
 }
 ```
+
+3. Using Constructor
+
+## Constructor
+
+- Constructor is block similar to method having same name as that of class name.
+- Constructor does not have any return type not even void.
+- The only modifier applicable for constructor are public, protected, default and private.
+- It executes automatically when we create object.
+
+```java
+class Employee{
+  String name;
+  int emp_id;
+  Employee(String name, int emp_id){//used constructor to initialize the instance variable of the object.
+    this.name = name;
+    this.emp_id = emp_id;
+  }
+  public static void main(String args[]){
+    Employee e1 = new Employee("Ashish", 12);
+    Employee e2 = new Employee("Rahul", 14);
+    System.out.println(e1.name);
+  }
+}
+```
+
+### Types of Constructor
+
+1. Default Constructor
+
+- It is created by compiler.
+
+```java
+class Test{
+  int a;
+  Test(){
+    super();
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    System.out.println(t.a);//a = 0 (default value)
+  }
+}
+```
+
+2. No-arg Constructor(User defined)
+
+```java
+class Test{
+  Test(){//It is created by the user.
+    System.out.println("No argument constructor");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+  }
+}
+```
+
+3. Parametrized Constructor
+
+```java
+class Test{
+  Test(String name){
+    System.out.println("Parametrized Constructor");
+  }
+  public static void main(String args[]){
+    Test t = new Test("Ashish");
+  }
+}
+```
