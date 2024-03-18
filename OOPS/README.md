@@ -341,3 +341,68 @@ public class Main {
 - Below does not take part in inheritance.
   - Constructors - A subclass inherit all the members(fields, method and nested class) from its super class. Constructors are not members so they are not inherited by subclasses, but the constructor of the super class can be invoked from the subclass.
   - Private member - A sublcass does not inherit private member of its parent class.
+
+### Relationship between classess.
+
+There are two types of relation
+
+![alt text](test.drawio.png)
+
+**Advantages**
+
+1. Code reusability
+2. Cost cutting
+3. Reduce redundancy
+
+### Inheritance
+
+```java
+class Vehicle{
+
+}
+class Car extends Vehicle{
+
+}
+```
+
+Car Is A Vehicle (Is A relationship)
+
+- In this realtion both classes are tightly coupled that means if we make changes in the first class second class also get affected.
+
+### Association
+
+```java
+class Student{
+  String name;
+  int roll_no;
+}
+```
+
+Student **Has A** name(Has a relation)\
+Student **Has A** roll_no(Has a relation)
+
+```java
+class Engine{
+
+}
+class Car{
+  Engine e = new Engine();
+}
+
+```
+
+Car **Has a** Engine
+
+- Classes are not tightly coupled that means we can use required properties of engine class with the help of reference object.
+
+**Aggregation:**
+
+Aggregation is a "has-a" relationship where one class, often called the container or parent class, contains references to another class, often called the contained or child class. The contained class is not dependent on the container class, meaning it can exist independently. Aggregation is a weaker form of association compared to composition.
+
+**Composition**
+
+Composition is a stronger form of association where one class, the composite, contains an instance of another class, the component, and the component cannot exist without the composite. In other words, the lifetime of the component is managed by the composite. 
+
+![alt text](relationex.drawio.png)
+
+
