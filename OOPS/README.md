@@ -401,8 +401,224 @@ Aggregation is a "has-a" relationship where one class, often called the containe
 
 **Composition**
 
-Composition is a stronger form of association where one class, the composite, contains an instance of another class, the component, and the component cannot exist without the composite. In other words, the lifetime of the component is managed by the composite. 
+Composition is a stronger form of association where one class, the composite, contains an instance of another class, the component, and the component cannot exist without the composite. In other words, the lifetime of the component is managed by the composite.
 
 ![alt text](relationex.drawio.png)
 
+## Polymorphism
 
+- Polymorphism in Java is a concept by which we can perform a single action in different ways.
+- The word "poly" means many and "morphs" means forms.
+
+### Types of polymorphism
+
+**1. Compile Time Polymorphism**
+
+- It is also known as static polymorphism.
+- We can achive compile time polymorphism by method overloading.
+- It is handle by compiler.
+
+**2. Run Time Polymorphism**
+
+- It is also known as dynamic polymorphism.
+- We can achive run time polymorphism by method overriding.
+- It is handle by JVM.
+
+### Method Overloading
+
+- Method name should be same.
+- Method should belong to same class.
+- Argument should be different.
+  - Number of argument should be different.
+  - Sequence of argument should be different.
+  - Type of argument should be different.
+
+```java
+public class Calculator {
+
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    // Number of argument is different
+    public int add(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    // Type of argument is different
+    public String add(String a, String b) {
+        return a + b;
+    }
+
+
+
+    public static void main(String[] args) {
+        Calculator calculator = new Calculator();
+
+        // Adding two integers
+        int sum1 = calculator.add(10, 20);
+        System.out.println("Sum of two integers: " + sum1);
+
+        // Adding three integers
+        int sum2 = calculator.add(10, 20, 30);
+        System.out.println("Sum of three integers: " + sum2);
+
+        // Concatenating two strings
+        String result = calculator.add("Hello", " World!");
+        System.out.println("Concatenated string: " + result);
+    }
+
+}
+```
+
+Special cases of method overloading
+
+**1. Can we achive Method overloading by changing the return type of method only?**
+
+Ans.
+
+```java
+class Test{
+  void show(int a){
+    System.out.println("1");
+  }
+  String show(int a){
+    System.out.println("2");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show(10);
+  }
+}
+
+```
+
+In java Method overloading is not possible by changing the return type of the method only because of ambiguity.
+
+**2. Can we overload java main() method**
+
+Ans.
+
+```java
+
+class Test{
+  public static void main(String args[]){
+    System.out.println("1");
+    Test t = new Test();
+    t.main(10);
+  }
+  public static void main(int a){
+    System.out.println("2");
+  }
+}
+
+//Output- 1 2
+```
+
+Yes we can have any number of main method in a class by method overloading. This is because JVM always calls main() method which recieves string array as argument only.
+
+#### Method Overloading - Case 1
+
+```java
+class Test{
+  void show(int a){
+    System.out.println("int method");
+  }
+  void show(String a){
+    System.out.println("string method");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show('a');
+  }
+}
+
+//Output - int method
+```
+
+**Automatic promotion**
+
+One type is promoted to other implicitly if no matching data type is found.
+
+![alt text](image-4.png)
+
+#### Method Overloading - Case 2
+
+```java
+class Test{
+  void show(Object a){
+    System.out.println("Object method");
+  }
+  void show(String a){
+    System.out.println("String method");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show("abc");
+  }
+}
+
+//Output - String method
+```
+
+While resolving Overloaded Methods, Compiler will always give precedent for the child type argument than compared with parent type argument.
+
+#### Method Overloading - Case 3
+
+```java
+class Test{
+  void show(StringBuffer a){
+    System.out.println("String Buffer method");
+  }
+  void show(String a){
+    System.out.println("String method");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show("abc");//String method
+    t.show(new StringBuffer("xyz"));//String Buffer method
+    t.show(null);//reference to show is ambiguos
+  }
+}
+```
+
+#### Method Overloading - Case 4
+
+```java
+class Test{
+  void show(int a, float b){
+    System.out.println("int float method");
+  }
+  void show(float a, int b){
+    System.out.println("float int method");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show(10,20.5f);//int float
+    t.show(10.5f,20);//float int
+    t.show(10,20)//reference to show is ambiguos - No automatic promotion
+  }
+}
+```
+
+#### Method Overloading - Case 4
+
+```java
+class Test{
+  void show(int a){
+    System.out.println("int method");
+  }
+  void show(int... a){//varargs allow the method to accept zero or multliple argument
+    System.out.println("varargs method");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show(10);// int method
+    t.show(10,20,30);// varargs method
+    t.show();// varargs method
+
+  }
+}
+```
+
+Varargs get less priority i.e if no other method matched, then only vararg method will get the chance.
