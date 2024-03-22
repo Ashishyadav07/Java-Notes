@@ -962,6 +962,7 @@ In java we can achive abstraction by two ways
 
 ```java
 
+
 abstract class Vehicle{//class should be abstract if there is any abstract method inside the class
     int no_of_tyres;
     abstract void start();//abstract method dont have any body.
@@ -975,20 +976,94 @@ abstract class Vehicle{//class should be abstract if there is any abstract metho
     void start(){
       System.out.println("Scooter starts with kick");
     }
-    
-  }
-class Main{
     public static void main(String args[]){
         Car c = new Car();
         c.start();
         Scooter s = new Scooter();
         s.start();
       }
-}
+
+  }
 ```
 
 - A method without body(no implementation) is known as abstract method.
 - A abstract method must be declared in an abstract class or we can say if a class has an abstract method, it should be declared abstract as well.
+- Abstract class can have both abstract method as well as concrete method.
 - If a regular class extends an abstract class, then the class must have to implement all the abstract methods of abstract parent class or it has to be declared abstract as well.
 - Abstract class cannot be instantiated means we can't create object of abstract class.
+
+### Interface
+
+- It is used to achive abstraction.
+- It support multiple inheritance.
+- It can be used to achive loose coupling.(Loose coupling is a design goal that seeks to reduce the inter-dependence between components of a system with the goal of reducing the risk that change in one component will require changes in any other component)
+- We can't create object of interface class.
+
+**Syntax**
+
+```java
+interface InterfaceName{
+  //by default method will be of public abstract type
+  //by default fields will be of public static final type
+  //In 8th version we can make default concrete method and static concrete method
+  //In 9th version we can make private concrete method
+}
+
+interface I1{
+  public abstract void show();
+  public static final int a = 10;
+  default void display(){
+
+  }
+  static void run(){
+
+  }
+}
+
+```
+
+**Program**
+
+```java
+
+interface I1{
+  void show();
+}
+class Test implements I1{
+  public void show(){
+    System.out.println("1");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show();
+  }
+}
+
+```
+
+**Multiple Inheritance with the helo of Interface**
+
+```java
+
+interface I1{
+  void show();
+}
+interface I2{
+  void display();
+}
+class Test implements I1, I2{
+  public void show(){
+    System.out.println("1");
+  }
+  public void display(){//We have to override the method in the interface
+    System.out.println("2");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show();
+    t.display();
+  }
+}
+
+```
 
