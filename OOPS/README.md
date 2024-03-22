@@ -946,3 +946,49 @@ class Xyz extends Test{
 ```
 
 The presence of synchronized/strictfp modifier with methods have no effects on the rules of overriding i.e it is possible that a synchronized/strictfp method can override a non synchronized/stictfp and vice versa.
+
+## Abstraction
+
+Abstraction is hiding internal implementation and just highlighting the main service that we offer.
+
+For example - As in the car, relevant parts like stearing, gear, horn, accelator is shown because they are necessary for driving but the driver dont need to know the internal function of engine, gear etc. Thus showing relvant data to the user and hiding implementation or the details from the user in the abstraction.
+
+In java we can achive abstraction by two ways
+
+- Abstract class(0 -100%)
+- Interface(100%)
+
+### Abstract class
+
+```java
+
+abstract class Vehicle{//class should be abstract if there is any abstract method inside the class
+    int no_of_tyres;
+    abstract void start();//abstract method dont have any body.
+  }
+  class Car extends Vehicle{
+    void start(){
+      System.out.println("Car starts with key");
+    }
+  }
+  class Scooter extends Vehicle{
+    void start(){
+      System.out.println("Scooter starts with kick");
+    }
+    
+  }
+class Main{
+    public static void main(String args[]){
+        Car c = new Car();
+        c.start();
+        Scooter s = new Scooter();
+        s.start();
+      }
+}
+```
+
+- A method without body(no implementation) is known as abstract method.
+- A abstract method must be declared in an abstract class or we can say if a class has an abstract method, it should be declared abstract as well.
+- If a regular class extends an abstract class, then the class must have to implement all the abstract methods of abstract parent class or it has to be declared abstract as well.
+- Abstract class cannot be instantiated means we can't create object of abstract class.
+
