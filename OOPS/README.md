@@ -480,7 +480,7 @@ Ans.
 ```java
 class Test{
   void show(int a){
-    System.out.println("1");
+     System.out.println("1");
   }
   String show(int a){
     System.out.println("2");
@@ -622,3 +622,327 @@ class Test{
 ```
 
 Varargs get less priority i.e if no other method matched, then only vararg method will get the chance.
+
+### Method overriding
+
+- Method name should be same.
+- Method should belong to different class.
+- Argument should be same.
+  - Number of argument should be same.
+  - Sequence of argument should be same.
+  - Type of argument should be same.
+- There should be **is a** realtionship between deifferent class.(Inheritance).
+
+```java
+
+class Test{
+  void show(String a, int b){
+    System.out.println("1");
+  }
+}
+class Xyz extends Test{
+  void show(String a, int b){
+    System.out.println("2");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show("abc", 2);
+    Xyz x = new Xyz();
+    x.show("xyz", 3);
+  }
+}
+```
+
+**Use of Method overriding**
+
+Method overriding allows a subclass or child class to provide a specific implementation of a method that is already provided by one of its superclasses or parent class. The implementation in the subclass override the implementation in the superclass by providing a method that has same name same parameters or signature and same return type as method in the parent class.
+
+**Case 1**
+
+Do overriding method must have the same return type(or subtype)?
+
+```java
+
+class Test{
+  Object show(){
+    System.out.println("1");
+    return null;
+  }
+}
+class Xyz extends Test{
+  String show(){
+    System.out.println("2");
+    return null;
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show();
+    Xyz x = new Xyz();
+    x.show();
+  }
+}
+```
+
+From java 5.0 onwards it is possible to have different return type for a overriding method in child class but child return type should be sub type of parents return type. This phenomenon is knowns as covariant return type. For example if parent class method is Object type then child class method can be String type but can't be vice versa.
+
+**Case 2**
+
+Overriding and access modifier
+
+```java
+class Test{
+  protected void show(){
+    System.out.println("1");
+
+  }
+}
+class Xyz extends Test{
+  public show(){
+    System.out.println("2");
+
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show();
+    Xyz x = new Xyz();
+    x.show();
+  }
+}
+
+```
+
+The access modifier of an overriding method(child class method) can allow more, but not less, access than the overriden method(parent class method). For example a protected instance method in the super class can be made public but not private in the subclass. Doing so will generate compile time error.
+
+** Case 3: Overriden and Exception Handling**
+
+- Rule 1: If the super class overriden method does not throws an exception, subclass overriding method can only throw the unchecked exception, throwing check exception will lead to compile time error.
+
+```java
+
+class Test{
+  void show(){
+    System.out.println("1");
+  }
+}
+
+class Xyz extends Test{
+  void show() throws ArithmeticException{// Throws unchecked exception we cant throws Exception because that is checked exception
+    System.out.println("2");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show();
+
+    Xyz ob = new Xyz();
+    ob.show();
+  }
+}
+```
+
+- Rule 2: If the super-class overriden method does throws and exception, subclass overriding method can only throw same subclass exception. Throwing parent exception in Exception hierarchy will lead to compile time error. Also there is no issue if subclass overriden method is not throwing any exception.
+
+```java
+
+class Test{
+  void show() throws RuntimeException{
+    System.out.println("1");
+  }
+}
+
+class Xyz extends Test{
+  void show() throws ArithmeticException{// We can only same sub class exception or no exception at all but we cant use parent class exception like Exception because it is parent class of RuntimeException.
+    System.out.println("2");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show();
+
+    Xyz ob = new Xyz();
+    ob.show();
+  }
+}
+```
+
+**Case 4 - Overriding and Abstract Method**
+
+```java
+abstract class Test{
+  abstract void display();
+  void show(){
+    System.out.println("1");
+  }
+}
+class Xyz extends Test{
+  void display(){//if we inherit abstract class then all the abstract method in that class should be overridden.
+
+  }
+  void show(){
+    System.out.println("2");
+  }
+   public static void main(String args[]){
+    // Test t = new Test();
+    // t.show(); //We cant create object of abstract class
+
+    Xyz ob = new Xyz();
+    ob.show();
+  }
+}
+```
+
+- If we inherit abstract class then all the abstract method in that class should be overriden than means its body should be in the subclass.
+
+```java
+interface I1{
+  void display1();//Every method in the Interface is abstract method
+}
+
+class Xyz implements I1{
+  public void display1(){//So we have to override that abstract method in the subclass.
+
+  }
+  void show(){
+    System.out.println("1");
+  }
+  public static void main(String args[]){
+    Xyz x = new Xyz();
+    x.show();
+  }
+}
+
+```
+
+- Abstract method in an interface or abstract class are meant to be overriden in derived concrete classes otherwise compile-time error will be thrown.
+
+**Case 5: Invoking overriden method from subclass**
+
+```java
+
+class Test{
+  void show(){
+    System.out.println("1");
+  }
+}
+class Xyz extends Test{
+  void show(){
+    super.show();//We can call parent class method in overriding method using super keyword.
+    System.out.println("2");
+  }
+  public static void main(String args[]){
+    Xyz ob = new Xyz();
+    ob.show();
+  }
+}
+
+```
+
+- We can call parent class method in overriding method using super keyword.
+
+**Case 6: Which method cannot override?**
+
+```java
+
+class Test{
+  final void show(){//final method cannot override
+    System.out.println("1");
+  }
+}
+class Xyz extends Test{
+  void show(){
+    System.out.println("2");
+  }
+  public static void main(String args[]){
+    Xyz ob = new Xyz();
+    ob.show();
+  }
+}
+
+```
+
+If we dont want a method to be overriden, we declare it as a final.
+
+```java
+
+class Test{
+  static void show(){//static method cannot override
+    System.out.println("1");
+  }
+}
+class Xyz extends Test{
+  void show(){
+    System.out.println("2");
+  }
+  public static void main(String args[]){
+    Xyz ob = new Xyz();
+    ob.show();
+  }
+}
+
+```
+
+Static methods cannot be overridden because they belong to the class itself rather than to any particular instance of the class. When a subclass defines a static method with the same signature as a static method in its superclass, it doesn't override the superclass method; instead, it hides it.
+
+```java
+
+class Test{
+  private void show(){//private method cannot override
+    System.out.println("1");
+  }
+}
+class Xyz extends Test{
+  void show(){
+    System.out.println("2");
+  }
+  public static void main(String args[]){
+    Xyz ob = new Xyz();
+    ob.show();
+  }
+}
+
+```
+
+Private methods cannot be overridden because they are not accessible to subclasses. When a method is declared as private in a class, it means that the method is accessible only within that class and cannot be accessed by any subclasses.
+
+**Case 7: Overriding and synchronized/strictfp method**
+
+```java
+
+class Test{
+  synchronized void show(){
+    System.out.println("1");
+  }
+}
+class Xyz extends Test{
+  void show(){
+    System.out.println("2");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show();
+    Xyz ob = new Xyz();
+    ob.show();
+  }
+}
+
+```
+
+```java
+
+class Test{
+   void show(){
+    System.out.println("1");
+  }
+}
+class Xyz extends Test{
+  strictfp void show(){
+    System.out.println("2");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.show();
+    Xyz ob = new Xyz();
+    ob.show();
+  }
+}
+```
+
+The presence of synchronized/strictfp modifier with methods have no effects on the rules of overriding i.e it is possible that a synchronized/strictfp method can override a non synchronized/stictfp and vice versa.
