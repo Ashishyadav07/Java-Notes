@@ -1067,3 +1067,31 @@ class Test implements I1, I2{
 
 ```
 
+## Encapsulation
+
+- Encapsulation in java is a mechanism of wrapping the data(variable) and code acting on the data(method) together as a single unit.
+- Steps to achive encapsulation.
+  - Declare the variable of class as a private.
+  - Provide public setter and getter method to modify and view the variable values.
+- In encapuslation the variables of class will be hidden from other classes and can be accessed only through the method of the current class. This concept is known as data hiding
+
+```java
+
+class Employee{
+  private int emp_id;
+  public void setEmpId(int empid){
+    emp_id = empid;
+  }
+  public int getEmpId(){
+    return emp_id;
+  }
+}
+
+class Company{
+  public static void main(String args[]){
+    Employee e = new Employee();
+    e.setEmpId(101);
+    System.out.println(e.getEmpId);
+  }
+}
+```
