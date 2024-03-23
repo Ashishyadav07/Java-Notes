@@ -1098,7 +1098,7 @@ class Company{
 
 ## this keyword
 
-this keyword is the reference variable that refers to the current object
+this keyword is the reference variable that refers to the current class object
 
 **6 Uses of this keyword**
 
@@ -1217,6 +1217,92 @@ class ThisDemo{
   public static void main(String args[]){
     ThisDemo t = new ThisDemo();
     t.m1();
+  }
+}
+
+```
+
+## super keyword
+
+super keyword is a reference variable which is used to refer immediate parent class object.
+
+```java
+class A {
+  int i = 10; // Instance variable specific to class A
+}
+
+class B extends A {
+  int i = 20; // Instance variable specific to class B
+
+  // Method to print the value of the local variable i
+  void show1(int i) {
+    System.out.println(i); // Prints the value of the local variable
+  }
+
+  // Method to print the value of the current class variable i
+  void show2() {
+    System.out.println(this.i); // Prints the value of the current class variable 'i'
+  }
+
+  // Method to print the value of the parent class variable i
+  void show3() {
+    System.out.println(super.i); // Prints the value of the parent class variable 'i'
+  }
+
+  public static void main(String args[]) {
+    B ob = new B(); // Creating an instance of class B
+    ob.show1(30); // Invoking show1 method with argument 30
+    ob.show2(); // Invoking show2 method
+    ob.show3(); // Invoking show3 method
+  }
+}
+
+```
+
+**Uses of super keyword**
+
+1. super keyword can be used to invoke immediate parent class object
+
+```java
+
+class A{
+  void m1(){
+    System.out.println("I am in class A");
+  }
+}
+
+class B extends A
+{
+  void m1(){
+     super.m1();
+    System.out.println("I am in class B");
+  }
+  public static void main(String args[]){
+    B b = new B();
+    b.m1();
+    // A a = new A();
+    // a.m1();
+  }
+}
+```
+
+2. super() can be used to invoke immediate parent class constructor.
+
+```java
+
+class A{
+  A(){
+    System.out.println("I am in class A");
+  }
+}
+
+class B extends A{
+  B(){
+    super();//It will be done by the compiler automatically it is used to invoke parent class constructor.
+    System.out.println("I am in class B");
+  }
+  public static void main(String args[]){
+    B ob = new B();
   }
 }
 
