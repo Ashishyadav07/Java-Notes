@@ -1095,3 +1095,129 @@ class Company{
   }
 }
 ```
+
+## this keyword
+
+this keyword is the reference variable that refers to the current object
+
+**6 Uses of this keyword**
+
+1. this keyword is use to invoke current class instance variable.
+
+```java
+
+class Test{
+  int i;
+  void setValue(int i){
+    this.i = i;//this refer to the current class instance variable.If we use i = i then the value will be 0 because it will take default value of int of local variable i
+  }
+  void show(){
+    System.out.println(i);
+  }
+}
+class Xyz{
+  public static void main(String args[]){
+    Test t = new Test();
+    t.setValue(5);
+    t.show();
+  }
+}
+```
+
+2. this keyword can be used to invoke current class method(implictly).
+
+```java
+
+class ThisDemo{
+  void display(){
+    System.out.println("hello");
+  }
+  void show(){
+    this.display();//if we don't use the this keyword, compiler automatically adds this keyword while invoking the method.
+  }
+  public static void main(String args[]){
+    ThisDemo t = new ThisDemo();
+    t.show();
+  }
+}
+
+//Output - hello
+```
+
+3. this keyword can be used to invoke current class constructor.
+
+```java
+
+class ThisDemo{
+  ThisDemo(){
+    this(10);//this keyword can be used to invoke currenct class constructor;
+    System.out.println("no arg constructor");
+  }
+  ThisDemo(int a){
+    System.out.println("parametrized constructor");
+  }
+  public static void main(String args[]){
+    ThisDemo t = new ThisDemo();
+  }
+}
+
+//Output- parametrized constructor
+//        no arg constructor
+```
+
+4. this keyword can be used to pass an argument in the method call.
+
+```java
+
+class ThisDemo{
+  void m1(ThisDemo td){
+    System.out.println("I am in m1 method");
+  }
+  void m2(){
+    m1(this);
+  }
+  public static void main(String args[]){
+    ThisDemo td = new ThisDemo();
+    td.m2();
+  }
+}
+```
+
+5. this keyword can be used to pass an argument in the constructor call.
+
+```java
+
+class Test{
+  Test(ThisDemo td){
+    System.out.println("Test class constructor");
+  }
+}
+class ThisDemo{
+  void m1(){
+    Test t = new Test(this);
+  }
+  public static void main(String args[]){
+    ThisDemo t = new ThisDemo();
+    t.m1();
+  }
+}
+
+
+```
+
+6. this keyword can be used to return current class instance.
+
+```java
+
+class ThisDemo{
+  ThisDemo m1(){
+    System.out.println("hello");
+    return this;//using this keyword to return current class type
+  }
+  public static void main(String args[]){
+    ThisDemo t = new ThisDemo();
+    t.m1();
+  }
+}
+
+```
