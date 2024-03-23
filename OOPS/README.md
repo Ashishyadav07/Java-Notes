@@ -1307,3 +1307,58 @@ class B extends A{
 }
 
 ```
+
+## final keyword
+
+If we create a final variable, it become constant we cannot change the value of the final variable.
+
+```java
+
+class Test{
+  public static void main(String args[]){
+    final int i = 10;
+    // i = i+10;// It will throw error we cannot assign value to final variable.
+    System.out.println(i);
+  }
+}
+```
+
+If we create a final method we cannot override it .
+
+```java
+
+class Demo{
+   final void m1(){//It will throw error as m1 in class test cannot override m1 in class Demo
+    System.out.println("I am in class Demo");
+  }
+}
+class Test extends Demo{
+  void m1(){
+        System.out.println("I am in class Test");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.m1();
+  }
+}
+```
+
+If we create final class no other class will be able to inherit it.
+
+```java
+final class Demo{
+   final void m1(){
+    System.out.println("I am in class Demo");
+  }
+}
+class Test extends Demo{//error as we cannot inherit final class Demo
+  void m1(){
+        System.out.println("I am in class Test");
+  }
+  public static void main(String args[]){
+    Test t = new Test();
+    t.m1();
+  }
+}
+
+```
