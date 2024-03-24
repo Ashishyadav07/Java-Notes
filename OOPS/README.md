@@ -1362,3 +1362,146 @@ class Test extends Demo{//error as we cannot inherit final class Demo
 }
 
 ```
+
+## static Keyword
+
+- static keyword is a non access modifier.
+- static can be used with variable(class level) not local variable.
+- static can be used with method.
+- We can also create static block.
+- static can be used with inner class(nested class) but not outer class.
+
+### static variable
+
+```java
+
+class Test{
+  static int a = 10;//We can use static over here as it is class level variable.
+  void m1(){
+    // static int b = 20;//We cant use static with the local variable.
+    int b = 20;// this is ok
+  }
+}
+class Demo{
+  public static void main(String args[]){
+    System.out.println(Test.a);//Static variable belong to the class so we can access with the help of class without creating object of it .
+  }
+}
+
+
+```
+
+We can use static variable for memory management.
+
+```java
+
+class Employee{
+  String empid;
+  String name;
+  static String company = "Oracle";//It will allocate memory in class area so it can be shared by other object
+  Employee(int empid, String name){
+    this.empid = empid;
+    this.name = name;
+  }
+  void display(){
+    System.out.println(empid + " " + name + " " + company + " ");
+  }
+  public static void main(String args[]){
+    Employee e1 = new Employee(101, "Ashish");
+    Employee e2 = new Employee(102, "Yadav");
+    e1.display();
+    e2.display();
+
+  }
+}
+
+```
+
+- When a variable is declared as static, then a single copy of variable is created and shared among all objects at class level. Thus company name "Oracle" will be shared among all the objects e1, e2,.. etc.
+
+- We make the static variable only when the value is common for all the objects.
+
+### static method
+
+We can use static method for memory management. It is a class level method so we dont need to make object to invoke that method.
+
+```java
+class Test{
+  static void display(){//static method is a class level method we dont need to create object to run this
+    System.out.println("1");
+  }
+  public static void main(String args[]){
+    display();//here is the proof
+    Xyz.show();//we call also call by class name if there is more than one class.
+  }
+}
+class Xyz{
+  static void show(){
+    System.out.println("2");
+  }
+}
+
+```
+
+**Rules for static method**
+
+1. A static method can only access static data. It cannot access non static data(instance data)
+
+```java
+class StaticDemo{
+  static int i = 10;
+  static void display(){
+    System.out.println(i);//A static method can only access static data i should be static over here otherwise throw error.
+  }
+}
+```
+
+2. A static method can call only other static method and not non static method.
+
+```java
+class StaticDemo{
+  static void display(){
+    show();//Error - static method can't call non static method.
+    System.out.println("1");.
+  }
+  void show(){
+    System.out.println("2");
+  }
+}
+
+```
+
+3. A static method cannot refer to this or super keyword in any way.
+
+```java
+class StaticDemo{
+  static int i = 10;
+  static void display(){
+    System.out.println(this.i);//we cant refer this or super keyword in static method
+  }
+}
+
+```
+
+### static block
+
+Static block executes automatically when the class is loaded in the memory.
+
+```java
+
+class StaticBlockDemo{
+  static{
+    System.out.println("hello");//static block is loaded before the main method static block can run without main method in the java 1.6 or previous version but not in latest version.
+  }
+  public static void main(String args[]){
+    System.out.println("world");
+  }
+}
+static{
+  System.out.println("Guys");
+}
+//the flow of the program is first the static block and variable is executed line by line then the main method.
+```
+
+- static block is used to write native code.
+- static block is used to initialize static variable.
