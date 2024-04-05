@@ -652,3 +652,267 @@ class Test extends Thread{
 ```
 
 In this program both the object will execute the method separately and it will take 10 second to execute completly.
+
+## yield() method.
+
+- It is a method which stops the current executing thread and give a chance to other thread for execution.
+- Working :
+  - In java 5 internally it used sleep method.
+  - In java 6 Thread provides the hint to the thread scheduler that it need to stop, then it depends on thread scheduler to accept or ignore the hint
+- Method : `java public static native void yield(); `
+
+**Program**
+
+```java
+class Test extends Thread{
+    public void run(){
+        for(int i = 1; i <= 5; i++){
+            System.out.println(Thread.currentThread().getName() +  " - " + i);
+        }
+    }
+    public static void main(String args[]){
+        Test t = new Test();
+        t.start();
+        Thread.yield();
+        for(int i = 1; i <= 5; i ++){
+            System.out.println("Main thread :  " + i);
+        }
+    }
+}
+```
+
+## join() method
+
+- If a thread wants to wait for another thread to complete its task then we should use join() method.
+
+**Methods**
+
+- public final void join() throws InterruptedException{ }
+- public final synchronized void join(long ms){ }
+- **Program 1**
+
+```java
+public class Test extends Thread{
+    public void run(){
+        try{
+            for(int i = 1; i <= 5; i ++){
+                System.out.println("Chil thread " + i);
+                Thread.sleep(1000);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    public static void main(String args[]) throws InterruptedException{
+        Test t = new Test();
+        t.start();
+        t.join();//It will wait for the child thread to get executed completely then main thread will run.
+         try{
+            for(int i = 1; i <= 5; i ++){
+                System.out.println("Main thread " + i);
+                Thread.sleep(1000);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+}
+
+```
+
+**Program 2**
+
+```java
+public class Test extends Thread{
+    static Thread mainthread;
+    public void run(){
+        try{
+            mainthread.join();//It will wait for the mainthread to completly execute before it gets executed.
+            for(int i = 1; i <= 5; i ++){
+                System.out.println("Chil thread " + i);
+                Thread.sleep(1000);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    public static void main(String args[]) throws InterruptedException{
+        mainthread = Thread.currentThread();//created reference for the main thread
+        Test t = new Test();
+        t.start();
+         try{
+            for(int i = 1; i <= 5; i ++){
+                System.out.println("Main thread " + i);
+                Thread.sleep(1000);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+}
+
+```
+
+**Program 3**
+
+```java
+class Medical extends Thread{
+    public void run(){
+        try{
+            System.out.println("Medical starts");
+            Thread.sleep(3000);
+            System.out.println("Medical completed");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+}
+class TestDrive extends Thread{
+    public void run(){
+         try{
+            System.out.println("TestDrive starts");
+            Thread.sleep(5000);
+            System.out.println("TestDrive completed");
+            }
+        catch(Exception e){
+            System.out.println(e);
+            }
+    }
+}
+class OfficerSign extends Thread{
+    public void run(){
+         try{
+            System.out.println("Officer takes the file");
+            Thread.sleep(5000);
+            System.out.println("Officer work completed");
+            }
+        catch(Exception e){
+            System.out.println(e);
+            }
+    }
+}
+public class LicenseDemo{
+    public static void main(String args[]) throws InterruptedException{
+        Medical medical = new Medical();
+        medical.start();
+        medical.join();
+        TestDrive td = new TestDrive();
+        td.start();
+        td.join();
+        Officersign os = new OfficerSign();
+        os.start();
+    }
+}
+```
+
+## Difference between yield() , join() and sleep().
+
+![alt text](image-9.png)
+
+## interrupt() method
+
+- It is used to interrupt an executing thread.
+- interrupt() method will only work when the thread is in sleeping(sleep()) or waiting state(wait()).
+- It will change the interrupt status to true.
+- When we use interrupt() method it throws an exception i.e InterruptedException.
+- If a thread is not in sleeping or waiting state then calling an interrupt method will perform normal behavior.
+
+**Syntax**
+
+public void interrupt(){}
+
+**Program**
+
+```java
+class Test extends Thread{
+    public void run(){
+        try{
+            for(int i = 1; i < 5; i ++){
+                System.out.println(i);
+                Thread.sleep(1000);//As soon it will find sleep method it will get interrupted. If there is no sleep() method then the program will run normally there will be no effect of interrupt method.
+            }
+        }
+        catch(Exception e){
+            System.out.println("Thread interrupted : " + e);
+        }
+    }
+    public static void main(String args[]){
+        Test t = new Test();
+        t.start();
+        t.interrupt();
+    }
+}
+```
+
+## interrupted() and isInterrupted() method.
+
+- Both interrupted() and isInterrupted() method is used to check whether a thread is interrupted or not.
+
+**Difference**
+
+- 1 Status
+
+  - interrupted() method clear the interrupted status from true to false if the thread is interrupted.
+  - isInterrupted() method does not clear the interrupted status.
+
+- 2 Result
+
+  - interrupted() method will change the result if called twice.
+  - isInterrupted() method will produce the same result if called twice.
+
+- 3 Syntax
+  - public static boolean interrupted() { }
+  - public boolean isInterrupted() { }
+
+**Program - interrupted()**
+
+```java
+class Test extends Thread{
+    public void run(){
+        System.out.println(Thread.interrupted());//As it will change the status from true to false after displaying it true, so the program will not get interrupted and will work normally.
+        try{
+            for(int i = 1; i <= 5; i ++){
+                System.out.println(i);
+                Thread.sleep(1000);
+            }
+        }
+        catch(Exception e){
+            System.out.println("Thread interrupted : " + e);
+        }
+    }
+    public static void main(String args[]){
+        Test t = new Test();
+        t.start();
+        t.interrupt();
+    }
+}
+```
+
+**Program - isInterrupted()**
+
+```java
+class Test extends Thread{
+    public void run(){
+        System.out.println(Thread.currentThread().isInterrupted());//The status will be remain true so the interrupt() method will work properly and when it encounter sleep method it will get interrupted.
+        try{
+            for(int i = 1; i <= 5; i ++){
+                System.out.println(i);
+                Thread.sleep(1000);
+            }
+        }
+        catch(Exception e){
+            System.out.println("Thread interrupted : " + e);
+        }
+    }
+    public static void main(String args[]){
+        Test t = new Test();
+        t.start();
+        t.interrupt();
+    }
+}
+```
