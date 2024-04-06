@@ -916,3 +916,291 @@ class Test extends Thread{
     }
 }
 ```
+
+## Synchronization
+
+```java
+class BookTheaterSeat{
+    int total_seats = 10;
+    void bookSeat(int seats){
+        if(total_seats >= seats){
+            System.out.println(seats + " seats booked successfully");
+            total_seats = total_seats - seats;
+            System.out.println("Seats left: " + total_seats);
+        }
+        else{
+            System.out.println("Seats cannot be booked");
+            System.out.println("Seats left: " + total_seats);
+        }
+    }
+}
+public class MovieBookApp extends Thread{
+    static BookTheaterSeat b;
+    int seats;
+    public void run(){
+        b.bookSeat(seats);
+    }
+    public static void main(String args[]){
+        b = new BookTheaterSeat();
+        MovieBookApp ashish = new MovieBookApp();
+        ashish.seats = 5;
+        ashish.start();
+        MovieBookApp amit = new MovieBookApp();
+        amit.seats = 6;
+        amit.start();
+
+    }
+}
+//The output in this program is very inconsistent as both the thread running siultaneously the resource which the both thread are sharing are manipulating according to the thread without caring about the other thread.
+//When multiple threads are using the same resource the data should be consistent.
+```
+
+**Synchronization Introduction**
+
+It is the process by which we can control the accesibilty of the multiple threads to a particular shared resource.
+
+**Problem which can occur without synchronization**
+
+- Data inconsistancy.
+- Thread interference.
+
+**Advantages of synchronization**
+
+- No data inconsistency problem
+- No thread interference
+
+**Disadvantages of synchronization**
+
+- Increase the waiting period of the thread.
+- Create performace problem.(To overcome synchronization disadvantages, java provide one package i.e java.util.concurrent).
+
+![alt text](image-10.png)
+
+## Synchronized method
+
+```java
+class BookTheaterSeat{
+    int total_seats = 10;
+   synchronized void bookSeat(int seats){//Synchronized method
+        if(total_seats >= seats){
+            System.out.println(seats + " seats booked successfully");
+            total_seats = total_seats - seats;
+            System.out.println("Seats left: " + total_seats);
+        }
+        else{
+            System.out.println("Seats cannot be booked");
+            System.out.println("Seats left: " + total_seats);
+        }
+    }
+}
+public class MovieBookApp extends Thread{
+    static BookTheaterSeat b;
+    int seats;
+    public void run(){
+        b.bookSeat(seats);
+    }
+    public static void main(String args[]){
+        b = new BookTheaterSeat();
+        MovieBookApp ashish = new MovieBookApp();
+        ashish.seats = 5;
+        ashish.start();
+        MovieBookApp amit = new MovieBookApp();
+        amit.seats 6;
+        amit.start();
+
+    }
+}
+```
+
+- If you declare any method as synchronized, it is known as synchronized method.
+
+- Synchronized method is used to lock an object for any shared resource.
+
+- When a thread invokes a synchronized method, it automatically acquires the lock for that object and releases it when the thread completes its task.
+
+## Synchronized block
+
+Synchronized block can be used to perform synchronization on any specific resource of the method.
+
+Suppose we have 50 lines of code in our method, but we want to synchronize only 5 lines, in such cases, we can use synchronized block.
+
+If we put all the codes of the method in the synchronized block, it will work same as the synchronized method.
+
+### Important points to remember
+
+- Synchronized block is used to lock an object for any shared resource.
+- Scope of synchronized block is smaller than the method.
+- A Java synchronized block doesn't allow more than one JVM, to provide access control to a shared resource.
+- The system performance may degrade because of the slower working of synchronized keyword.
+- Java synchronized block is more efficient than Java synchronized method.
+
+```java
+class BookTheaterSeat{
+    int total_seats = 10;
+   void bookSeat(int seats){
+    System.out.println("Hello " + Thread.currentThread().getName());
+    System.out.println("Hello " + Thread.currentThread().getName());
+    System.out.println("Hello " + Thread.currentThread().getName());
+    System.out.println("Hello " + Thread.currentThread().getName());
+    System.out.println("Hello " + Thread.currentThread().getName());
+    synchronized(this){//Synchronized block so that the code outside the block can run independently without waiting for the synchronized code to get executed.
+        if(total_seats >= seats){
+            System.out.println(seats + " seats booked successfully");
+            total_seats = total_seats - seats;
+            System.out.println("Seats left: " + total_seats);
+        }
+        else{
+            System.out.println("Seats cannot be booked");
+            System.out.println("Seats left: " + total_seats);
+        }
+    }
+    System.out.println("Hello " + Thread.currentThread().getName());
+    System.out.println("Hello " + Thread.currentThread().getName());
+    System.out.println("Hello " + Thread.currentThread().getName());
+    System.out.println("Hello " + Thread.currentThread().getName());
+    System.out.println("Hello " + Thread.currentThread().getName());
+    }
+
+}
+public class MovieBookApp extends Thread{
+    static BookTheaterSeat b;
+    int seats;
+    public void run(){
+        b.bookSeat(seats);
+    }
+    public static void main(String args[]){
+        b = new BookTheaterSeat();
+        MovieBookApp ashish = new MovieBookApp();
+        ashish.seats = 5;
+        ashish.start();
+        MovieBookApp amit = new MovieBookApp();
+        amit.seats 6;
+        amit.start();
+
+    }
+}
+```
+
+## static synchronization
+
+```java
+class BookTheaterSeat{
+   static int total_seats = 20;
+   synchronized static void bookSeat(int seats){//If you make any static method as synchronized, the lock will be on the class not on object.
+        if(total_seats >= seats){
+            System.out.println(seats + " seats booked successfully");
+            total_seats = total_seats - seats;
+            System.out.println("Seats left: " + total_seats);
+        }
+        else{
+            System.out.println("Seats cannot be booked");
+            System.out.println("Seats left: " + total_seats);
+        }
+    }
+}
+
+class MyThread1 extends Thread{
+    BookTheaterSeat b;
+    int seats;
+    MyThread1(BookTheaterSeat b, int seats){
+        this.b = b;
+        this.seats = seats;
+    }
+    public void run(){
+        b.bookSeat(seats);
+    }
+}
+
+class MyThread2 extends Thread{
+    BookTheaterSeat b;
+    int seats;
+    MyThread2(BookTheaterSeat b, int seats){
+        this.b = b;
+        this.seats = seats;
+    }
+    public void run(){
+        b.bookSeat(seats);
+    }
+}
+
+public class MovieBookApp{
+    public static void main(String args[]){
+        BookTheaterSeat b1 = new BookTheaterSeat();
+        MyThread1 t1 = new MyThread1(b1, 7);
+        t1.start();
+        MyThread2 t2 = new MyThread2(b1, 6);
+        t2.start();
+
+
+        BookTheaterSeat b2 = new BookTheaterSeat();
+        MyThread1 t3 = new MyThread1(b2, 5);
+        t3.start();
+        MyThread2 t4 = new MyThread2(b2, 9);
+        t4.start();
+    }
+}
+```
+
+
+**Problem without Static synchronization**
+
+Suppose there are two objects of a shared class (e.g. BookTheaterSeat) named b1 and b2. In case of synchronized method and synchronized block there cannot be interference between t1 and t2 or t3 and t4 because t1 and t2 both refers to a common object that have a single lock. But there can be interference between t1 and t3 or t2 and t4 because t1 acquires another lock and t3 acquires another lock. We don't want interference between t1 and t3 or t2 and t4. Static synchronization solves this problem.
+
+**Static Synchronization**
+
+If you make any static method as synchronized, the lock will be on the class not on object.
+
+## Inter-thread communication
+
+Inter thread communication is a mechanism in which thread releases the lock and enter into paused state and another thread acquires the lock and continue to get executed.
+
+It is implemented by following objects of method class.
+
+**1. wait()** - If any thread calls the wait() method, it causes the current thread to release the lock and wait until another thread invokes the notify() or notifyAll() method for this object or a specified amount of time has elapsed.
+
+**Syntax** 
+- ```java public void final wait() throws InterruptedException``` (wait until object is notified)
+
+- ```java public final void wait(long timeout) throws InterruptedException``` (waits for the specified amount of time)
+
+**2. notify()** - This method is used to wake up a single thread and releases the object lock.
+
+**Syntax**
+
+- ```java public final void notify() ```
+
+**3. notifyAll()** - This method is used to wake up all threads which are in waiting state.
+
+**Syntax**
+
+- ```java public final void notifyAll()```
+
+**NOTE** - To call wait(), notify(), or notifyAll() method on any object, thread should own the lock of that object i.e thread should be in synchronized area.
+
+
+```java
+
+class TotalEarnings extends Thread{
+    int total=0;
+    public void run(){
+        synchronized(this){
+            for(int i = 1; i <= 10; i++){
+            total = total + 100;
+          }
+          this.notify();//As soon as this method called by the thread 0 main thread will get executed.
+        }
+    }
+}
+public class MovieBookApp{
+    public static void main(String args[]) throws InterruptedException{
+        TotalEarnings t = new TotalEarnings();
+        t.start();
+        // System.out.println("Total earnings : "+t.total);//This will print the output 0 as main thread will complete its execution before thread 0 so to fix this we have to use wait() and notify() method
+        synchronized(t){
+            t.wait();//Main thread will wait till the jvm dont run notify() method.It will release the lock and will wait till another thread invokes the notify() method.
+            System.out.println("Total earnings : "+t.total);
+        }
+    
+    }
+}
+
