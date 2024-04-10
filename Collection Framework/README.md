@@ -473,3 +473,239 @@ class Test{
 
 - Linked List are non synchronized collection so it is not thread safe and it runs very fastly.
 
+## Linked List methods and constructors.
+
+```java
+interface Collection{
+  boolean add(Object obj);
+  boolean addAll(Collection c);
+
+  boolean remove(Object obj);
+  boolean removeAll(Collection c);
+
+  void clear();
+
+  boolean contains(Object obj);
+  boolean containsAll(Collection c);
+
+  boolean isEmpty();
+
+  int size();
+
+  Iterator iterator();
+
+  ---etc
+}
+
+interface List extends Collection {
+  //contains collection interface method
+  
+  void add(int index, Object ob);
+  void addAll(int index, Collection c);
+
+  Object get(int index);
+
+  Object remove(int index);
+
+  Object set(int index, Object newObj);
+
+  int indexOf(Object obj);
+  int lastIndexOf(Object obj);
+
+  ---etc
+}
+
+class LinkedList implements List, Deque{
+  //contains Collection, List and Deque method.
+
+  void addFirst(Object obj);
+  void addLast(Object obj);
+
+  Object getFirst();
+  Object getLast();
+
+  Object removeFirst();
+  Object removeLast();
+
+
+}
+
+```
+### Linked List constructor.
+
+1. LinkedList(): This constructor is used to create an empty linked list. If we wish to create an empty LinkedList with the name ll, then, it can be created as: 
+
+   ```LinkedList ll = new LinkedList();  ```
+
+2. LinkedList(Collection C): This constructor is used to create an ordered list that contains all the elements of a specified collection, as returned by the collection’s iterator. If we wish to create a LinkedList with the name ll, then, it can be created as: 
+
+   ```LinkedList ll = new LinkedList(C);```
+
+
+## Difference between ArrayList and Linked List.
+
+![alt text](image-7.png)
+
+## Legacy classes 
+
+**Some classes i.e Vector, Stack Hashtable etc was introduced in JDK 1.0 version but when collection framework was introduced in JDK 1.2 version there classes were modified or say re-engineered so that they can be adjusted in new collection hierarchy, so these older classes are known as legacy classes**
+
+### Vector
+
+- Vector is a legacy class which was introduced in JDK 1.0 version.
+
+- Vector is an implemented class of list interface which is present in java.util package.
+
+   **Syntax**
+
+   ```java
+   class Vector implements List{
+    //constructors
+    //methods
+   }
+   ```
+
+- The underlying data structure of vector is ""growable or resizable arrray".
+
+#### Properties
+
+- Vector is an indexed based data structure.
+
+- Vector can store different data types.
+
+- We can store duplicate elements and multiple null values.
+
+- Vector follows the insertion order and not sorting order.
+
+- Vector are synchronized collection.(Note - All legacy classes are synchronized).
+
+#### Methods of vector class.
+
+- It contains list and collection interface methods.
+
+   ```addElement(Object obj)```
+
+   ```firstElement()```
+
+   ```lastElement()```
+
+   ```removeElement(Object obj)```
+
+   ```removeElementAt(int index)```
+
+   ```removeAllElement()```
+
+   ```capacity()```
+
+```java
+
+import java.util.Vector;
+
+class Test{
+  public static void main(String args[]){
+
+    //constructor
+    Vector v = new Vector();//construct an empty vector so that its internal data array has size 10
+    Vector v1 = new Vector(6);//empty vector with size 6
+    Vector v2 = new Vector(Collection c)//Collection c will get added in Vector v2
+    Vector v4 = new Vector(int initialCapacity, int capacityIncrement)//Capacity of the vector will increase with this constructor.
+
+    v.add("Ashish");
+    v.add("yadav");
+    v.add(7);
+    System.out.println(v);
+
+  }
+}
+
+```
+
+## ArrayList vs Vector
+
+### ArrayList
+
+- ArrayList is not a legacy class. It is introduced in JDK 1.2.
+
+- ArrayList is not synchronized.
+
+- ArrayList increments 50% ((oldcapacity*3/2)+1) of current array size if the number of elements exceeds from its capacity.
+
+- ArrayList is fast because it is non-synchronized.
+
+- ArrayList uses the Iterator interface to traverse the elements.
+
+- It does not provide data consistency.
+
+### Vector
+
+- Vector is a legacy class. It is introduced in JDK 1.0
+
+- Vector is synchronized.
+
+- Vector increments 100% means doubles the array size if the total number of elements exceeds than its capacity. (oldcapacity*2)
+
+- Vector is slow because it is synchronized, i.e., in a multithreading environment, it holds the other threads in runnable or non-runnable state until current thread releases the lock of the object.
+
+- A Vector can use the Iterator interface or Enumeration interface to traverse the elements.
+
+- It provides data consistency.
+
+
+## Stack
+
+- Stack is the legacy which was introduced in JDK 1.0 version.
+
+- Stack is the child class of Vector class which is present in java.util package.
+
+**Syntax**
+
+   ```java
+
+   class Stack extends Vector{
+
+    //constructors
+    //methods
+
+   }
+
+   ```
+
+### Properties of stack.
+
+- Stack class was designed on the basis of LIFO(Last In First Out).
+
+- Stack can be implemented on the basis of arrays, ArrayList, Linked list and Vector.
+
+- Stack is an indexed based data structure.
+
+### Constructor
+
+```Stack()```
+
+### Method
+
+```push()``` - The method pushes (insert) an element onto the top of the stack.
+
+```pop()``` - The method removes an element from the top of the stack and returns the same element as the value of that function.
+
+```peek()``` - The method looks at the top element of the stack without removing it.
+
+```search(Object o)``` - The method searches the specified object and returns the position of the object.
+
+```empty()``` - The method checks the stack is empty or not.
+
+```java
+import java.util.Stack;
+class Test{
+  public static void main(String args[]){
+    Stack s = new Stack();
+    s.push(5);
+    s.push(6);
+    s.push(7);
+    System.out.println(s.pop());
+    System.out.println(s.peek());
+    System.out.println(s.empty());
+    System.out.println(s.search(5));
+  }
+}
+```
