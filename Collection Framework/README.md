@@ -261,3 +261,215 @@ public class SetDemo{
 }
 
 ```
+
+## Iterator and ListIterator
+
+### Iterator
+
+- We can get Iterator cursor by iterator() method.
+
+  - Iterator itr = l.iterator();
+
+- Iterator can be used with any collection object.
+
+- Iterator methods are : 
+
+  - hasNext() , next() , remove()
+
+- By using the Iterator cursor we can retrieve the element only in forward direction.
+
+- By using the Iterator cursor we can read and remove the elements.
+
+```java
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+public class ListDemo{
+    public static void main(String args[]){
+        List l = new ArrayList();
+        l.add(10);
+        l.add("Ashish");
+        l.add("Yadav");
+        Iterator itr = l.iterator();//It will create object name itr with all the elements copied from the l collection
+        while(itr.hasNext()){//It will check whether any next element is present or not it will return boolean value.
+            System.out.println(itr.next());//It will print the next value 
+        }
+    }
+}
+
+```
+
+### ListIterator
+
+- We can get ListIterator cursor by ListIterator() method.
+
+  - ListIterator li = l.listIterator();
+
+- ListIterator cursor can be used only with List implemented classses i.e, ArrayList, LinkedList, Vector, Stack.
+
+- ListIterator methods are : 
+
+  - hasNext() , next() , hasPrevious() , previous() , remove() , set().
+
+- By using ListIterator cursor we can retrieve the elements in both forward and backward direction.
+
+- By using ListIterator cursor we can read, remove, replace and add the element.
+
+```java
+
+import java.util.ArrayList;
+import java.util.ListIterator;
+import java.util.List;
+public class ListDemo{
+    public static void main(String args[]){
+        List l = new ArrayList();
+        l.add(10);
+        l.add("Ashish");
+        l.add("Yadav");
+        ListIterator itr = l.listIterator();//It will create object name itr with all the elements copied from the l collection
+        while(itr.hasNext()){//It will check whether any next element is present or not it will return boolean value.
+            System.out.println(itr.next());//It will print the next value 
+        }
+        while(itr.hasPrevious()){//This code will get execute only by moving the cursor forward then only we can move the cursor backward to print the element
+            System.out.println(itr.previous());
+        }
+    }
+}
+
+```
+
+## Enumeration
+
+- Enumeration is the cursor which is used to retrieve collection object one oby one.
+
+- Enumeration was introduced in JDK 1.0 version.
+
+- Enumeration cursor can be used only with legacy classes i.e, Vector and Stack.
+
+- Enumeration cursor can be get by elements() method.
+
+  - ```Enumeration e = v.elements();```
+
+- Methods of enumeration cursor are 
+
+  - ```hasMoreElement()```
+  - ```nextElement()```
+
+- Enumeration cursor can be used to retrive the element only in the forward direction.
+
+- Enumeration cursor can be used only for read operation.
+
+```java
+import java.util.Vector;
+import java.util.Enumeration;
+
+class Test{
+    public static void main(String args[]){
+        Vector v = new Vector();
+        v.add(5);
+        v.add("Ashish");
+        v.add(10.5);
+
+        //System.out.println(v);
+
+        Enumeration e = v.elements();//It works only for the legacy class like vector and stack.
+        while(e.hasMoreElements()){
+            System.out.println(e.nextElement())
+        }
+    }
+}
+```
+
+## ArrayList
+
+- ArrayList is an implemented class of List Interface which is present in java.util package
+
+- **Syntax**
+
+  ```java package java.util;
+  class ArrayList implements List{
+    //constructor
+    //method
+  }
+
+  ```
+- Array list is created on the basis of growable or resizable array.
+
+### Properties of ArrayList
+
+- ArrayList are indexed based data structure.
+
+- ArrayList can store differenct types of data type.
+
+- ArrayList can store duplicate values.
+
+- ArrayList can store any number of null values.
+
+- ArrayList follows the insertion order i.e the elements are stored and retrieved in a sequential manner.
+
+- ArrayList does not follow the sorting order.
+
+- ArrayList are non-synchronized.
+
+
+## ArrayList Constructors and Methods.
+
+```java
+class Test{
+    public static void main(String args[]){
+        //Constructors
+        ArrayList all = new ArrayList();//default constructor with capacity of 10 i.e this arraylist can store 10 element.
+        all.add(4);
+        all.add(5);
+        all.add(6);
+        ArrayList all2 = new ArrayList(6);//Initial capacity constructor - It means this capacity can store 6 element.
+        ArrayList all3 = new ArrayList(all);//It will add all the value of collection object all to all3.
+
+    }
+}
+```
+![alt text](image-5.png)
+
+## Linked list
+
+- Linked List is an implemented class of List interface which is present in java.util package.
+
+- **Syntax**
+
+  ```java
+  class LinkedList implements List,Deque{
+    //constructor
+    //method
+  }
+
+- The underlying data structure of Linked List is "doubly linked list" or "circular linked list".
+
+   ![alt text](image-6.png)
+
+### Advantage.
+
+- Insertion and deletion operation are fast.
+
+- We can traverse the list in forward and backward direction both.
+
+### Disadvantage.
+
+- It occupies extra space for previous node address.
+
+- In case of insertion or deletion of element in between we have to manage the previous and next node of that element.
+
+### Properties
+
+- Linked list are indexed based data structure.
+
+- Linked List can store different data types.
+
+- Linked List can allow duplicate element.
+
+- Linked List can add duplicate values.
+
+- Linked List follows the insertion order but linked list does not follow the sorting order.
+
+- Linked List are non synchronized collection so it is not thread safe and it runs very fastly.
+
