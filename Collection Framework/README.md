@@ -709,3 +709,189 @@ class Test{
   }
 }
 ```
+
+## HashSet
+
+- It is an implemented class of Set interface which is present in java.util package.
+
+- **Syntax**
+
+  ```java
+  class HashSet implements Set{
+    //connstructors
+    //methods
+  }
+  ```
+
+- HashSet underlying data structure is "Hash Table".
+
+- HashSet is backed up by **Map**
+
+- HashSet was introduced in JDK 1.2 version.
+
+### Properties of HashSet
+
+- HashSet are not indexed based data structure. They store the elements according to their hashcode value.
+
+- HashSet does not store duplicate elements, as the elemets are stored internally in map as a key and key does not allow duplicate element.
+
+- HashSet cannot store multiple null values.
+
+- HashSet can store different data types i.e heterogeneous element.
+
+- HashSet does not follow insertion order.
+
+- HashSet does not follow the sorting order.
+
+- HashSet are non synchronized data structure so multiple threads can execute parallelly.
+
+
+## Methods and Constructor of HashSet
+
+```java
+import java.util.HashSet;
+public class Test{
+  public static void main(String args[]){
+    HashSet hs = new HashSet();
+    hs.add(4);
+    hs.add("Ashish");
+    hs.add(49);
+    hs.add("Ashish");//Duplicate value will not get added
+    System.out.println(hs);//does not follow the insertion order and sorting order
+    Iterator itr = hs.iterator();
+    while(itr.hasNext()){//display the elements one by one
+      System.out.println(itr.next());
+    }
+  }
+}
+
+```
+### Constructors
+
+![alt text](image-8.png)
+
+### Methods
+
+![alt text](image-9.png)
+
+## TreeSet
+
+- TreeSet directly implements class of navigable set but indirectly implements SortedSet and Set Interface which is present in java.util package.
+
+- **Syntax**
+
+   ```java
+
+   class TreeSet implements NavigableSet{
+    //constructors
+    //methods
+   }
+
+- It was introduced in JDK 1.2 version
+
+- TreeSet underlying data structure in balanced tree.
+
+### Properties of TreeSet
+
+- It is not an indexed based data structure.
+
+- It does not follow the insertion order.
+
+- It follows the sorting order
+
+**Internal Working**
+
+TreeSet is being implemented using a binary search tree, which is self-balancing just like a Red-Black Tree. Therefore, operations such as a search, remove, and add consume O(log(N)) time. It uses compareTo(Object obj) method. It is a Comparable Interface method which is used to compare the current object with the specified object. It returns as follows : 
+
+  - +ve integer : If the current object is greater than the specified object.
+  - -ve integer : If the current object is less than the specified object.
+  - 0 : If the current object is equal to the specified object.
+
+- It stores the homogeneous element i.e same data type.
+
+- It cannot stores the duplicate elements.
+
+- It is a non synchronized data structure. Multiple thread can execute simultaneously.
+
+- It cannot store the null values. It was possible to add in the first node before JDK 1.6 version.
+
+## TreeSet methods and constructors.
+
+```java
+import java.util.TreeSet;
+public class Test{
+  public static void main(String args[]){
+    TreeSet ts = new TreeSet();
+    ts.add(3);
+    ts.add(40);
+    ts.add(20);
+    ts.add("Ashish");//We cant add element with different data type
+    ts.add(null);//We cant add null values
+    System.out.println(ts);//It prints the element in sorted order
+  }
+}
+```
+
+### Constructors
+
+![alt text](image-10.png)
+
+### Methods
+
+https://www.javatpoint.com/java-treeset
+
+
+## Map
+
+- Map is an interface which is present in java.util package.
+
+- **Syntax**
+
+   ```java
+   public interface Map{
+    //methods
+   }
+   ```
+
+- Map was introduced in JDK 1.2 version
+
+- Hierarchy of Map interface
+
+  ![alt text](image-11.png)
+
+
+### Properties of Map
+
+- Map stores the data in key value pair
+
+- In Map key should be unique but value can be duplicate.
+
+- In Map we can store maximum one null value in key but can store multiple null values in value
+
+- Map does not follow the sorting and insertion order.
+
+### Methods of Map
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+public class Test{
+  public static void main(String args[]){
+    Map map = new HashMap();
+    map.put(101, "Ashish");
+    map.put(102, "Yadav");
+    map.put(103, "Ravi");
+    System.out.println(map.containsKey(101));//It check whether the key is present or not
+    System.out.println(map.containsValue("Ashish"));//It checks whether the value is present or not
+    System.out.println(map.get(101));//It prints the value of that key
+    System.out.println(map.remove(103));//It removes the entry
+    map.replace(102,"Deepak");//It replace the value
+    System.out.println(map.size());//It gives size of the map
+    System.out.println(map);
+    map.clear();
+    System.out.println(map);
+
+  }
+}
+
+```
