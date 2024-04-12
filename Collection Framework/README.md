@@ -895,3 +895,201 @@ public class Test{
 }
 
 ```
+
+## HashMap
+
+- HashMap is an implemented class of Map interface which is present in java.util package.
+
+- **Syntax**
+
+  ```java
+  class HashMap implements Map{
+    //constructor
+    //method
+  }
+
+- HashMap was introduced in JDK 1.2 version.
+
+- HashMap underlying data structure is Hash table.
+
+### Properties of HashMap
+
+- HashMap stores the value in key value pair.
+
+- **Each Key value pair is known as entry**
+
+- In HashMap key should always be unique but value can be duplicate.
+
+- HashMap contains maximum one null value in key but it can store multiple null values in value.
+
+- HashMap can store different data type i.e heterogeneous element.
+
+- HashMap does not follow the sorting or insetion order.
+
+- HashMap is non synchronized data structure. Multiple threads can run parralely.
+
+## HashMap methods.
+
+```java
+
+import java.util.HashMap;
+import java.util.Set;
+import java.util.Iterator;
+import java.util.Map;
+class Test{
+  public static void main(String args[]){
+    HashMap <Integer, String> hm = new HashMap();
+    hm.put(101, "Ashish");
+    hm.put(102, "Rahul");
+    hm.put(103, "Mohit");
+    hm.put(104, "Deepak");
+    System.out.println(hm);
+    System.out.println(hm.containsKey(103));
+    System.out.println(hm.get(103));
+    
+    for(Map.Entry me: hm.entrySet()){
+        System.out.println(me.getKey() + "----->" + me.getValue());
+    }
+    hm.remove(104);
+    System.out.println(hm);
+    
+    
+    // Set set = hm.entrySet();
+    // // System.out.println(set);
+    // Iterator itr = set.iterator();
+    // while(itr.hasNext()){
+    //     // System.out.println(itr.next());/
+    //     Map.Entry entry = (Map.Entry) itr.next();
+    //     System.out.println(entry.getKey() + "--->" + entry.getValue());
+        
+    // }
+  }
+}
+```
+
+### Constructors.
+
+![alt text](image-12.png)
+
+### Methods
+
+https://www.javatpoint.com/java-hashmap
+
+## TreeMap
+
+- It is implemented class of NavigableMap but it also inherits the properties of SortedMap and Map interface.
+
+- **Syntax**
+
+  ```java
+  class TreeMap implements NavigableMap{
+    //constructor
+    //method
+  }
+
+- It was introduced in JDK 1.2 version.
+
+- TreeMap underlying data structure is "Red-Black" tree.
+
+**Properties of Red black tree.**
+
+  - Every node is either red or black colour.
+  - The root node is always black.
+  - Every leaf node(NULL node) is black.
+  - If a node is red, then both its children is black.
+  - For each node, all paths from the node to its descendant leaf nodes contains the same number of black nodes.
+
+### Properties of TreeMap.
+
+- We store the data in key value pair in which keys should be should unique but value can be duplicate.
+
+- TreeMap does not follows the insertion order but follows the sorting order with respect to keys.
+
+- It can store both homogeneous(default sorting nature) and heterogeneous elements(if using comparator).
+
+- TreeMap cannot store null values.
+
+- TreeMap is non synchronized Data structure. Multiple thread can execute parallely.
+
+## TreeMap methods.
+
+```java
+import java.util.TreeMap;
+class Test{
+  public static void main(String args[]){
+    TreeMap map = new TreeMap();
+    map.put(107, "Ashish");
+    map.put(105, "Rahul");
+    map.put(104, "Manish");
+    map.put(112, "Mohit");
+    System.out.println(map);//follows the sorting order wrt keys.
+    System.out.println(map.ceilingEntry(106));//It will return 112 key value as there is no 106 key.
+    System.out.println(map.ceilingKey(106));//It will only return ceiling key.
+    System.out.println(map.containsKey(106));//It will return false as there is no 106 key.
+    System.out.println(map.firstEntry());//It will return first entry of the treemap.
+    System.out.println(map.firstKey());//It will return the key of the first entry.
+    System.out.println(map.floorEntry(106));//opposite of ceiling Entry.
+    System.out.println(map.get(105));//It will print "Rahul".
+    System.out.println(map.headMap(106));//It returns the key-value pairs whose keys are strictly less than toKey.
+    System.out.println(map.higherEntry(106));//It returns the least key strictly greater than the given key, or null if there is no such key.
+    System.out.println(map.keySet(106));//It returns the collection of keys exist in the map.
+    System.out.println(map.pollFirstEntry(106));//It removes and returns a key-value mapping associated with the least key in this map, or null if the map is empty.
+    System.out.println(map.size());//It return the size of teh treemap.
+    map.replace(104, "jj");
+    map.clear();//It will delete all the values inside map.
+  }
+}
+```
+
+### Constructor.
+
+![alt text](image-13.png)
+
+### Methods.
+
+https://www.javatpoint.com/java-treemap
+
+## HashTable
+
+- HashTable is the direct implemented class of Map interface. It is present in java.util package.
+
+- **Syntax**
+
+   ```java
+   class Hashtable implements Map{
+    //constructor
+    //method
+   }
+
+- It is a legacy class and was introduced in JDK 1.0 version.
+
+- HashTable underlying data structure is HashTable.
+
+### Properties of HashTable.
+
+- Hastable contains the data in key value pair and each key value pair is know as entry.
+
+- In HashTable key should always be unique but value can be duplicate.
+
+- HashTable can store hetrogeneous elements or different types of elements at key position.
+
+- We cannot store null value in HashTable.
+
+- HashTable does not follow insertion order or sorting order.
+
+- HashTable are synchronized data structure.
+
+### Working of HashTable
+
+We can consider a Hashtable as an array of buckets, where each bucket contains a list of entries. An entry consists of both keys and values. We specify a key and the value thatcan be linked to that key. The key is then hashed to generate a hash code that is furtherused as the index at which the value is stored within the table. The function that helps in getting the location of values from hashcode is called as hash function. It always returns a positive integer value known as hashcode. 
+
+**Formula to allocate index**
+
+```indexNumber = hashNumber % totalBuckets```
+
+**Collision in Hashtable**
+
+As discussed earlier, multiple objects might get same hashcode which leads to a situation called collision. It occurs when two or more keys have the same hash value and are mapped to the same bucket resulting in slow performance.
+
+![alt text](image-14.png)
+
