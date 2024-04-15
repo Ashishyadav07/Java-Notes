@@ -242,6 +242,8 @@ With an array, you can explicitly wipe the data after you are done with it. You 
 
 ## String class method.
 
+
+
 **length()**
 
 - The string length() method counts the number of character in the string and returns it in integer. This method return the length of any string which is equal to the number of 16 bit unicode character.If the string is null it will throw NullPointerException.
@@ -421,3 +423,244 @@ public class Test{
     }
 }
 ```
+
+**indexOf**
+
+- The Java String class indexOf() method returns the position of the first occurrence of the specified character or string in a specified string.
+
+![alt text](image-3.png)
+
+```java
+public class IndexOfExample{  
+    public static void main(String args[]){  
+        String s1="this is index of example";  
+        //passing substring  
+        int index1=s1.indexOf("is");//returns the index of is substring  
+        int index2=s1.indexOf("index");//returns the index of index substring  
+        System.out.println(index1+"  "+index2);//2 8  
+  
+  //passing substring with from index  
+  int index3=s1.indexOf("is",4);//returns the index of is substring after 4th index  
+  System.out.println(index3);//5 i.e. the index of another is  
+  //passing char value  
+  int index4=s1.indexOf('s');//returns the index of s char value  
+  System.out.println(index4);//3  
+}}  
+```
+
+**lastIndexOf()**
+
+- The Java String class lastIndexOf() method returns the last index of the given character value or substring. If it is not found, it returns -1. The index counter starts from zero.
+
+![alt text](image-4.png)
+
+```java
+public class LastIndexOfExample{  
+    public static void main(String args[]){  
+        String s1="this is index of example";//there are 2 's' characters in this sentence  
+        int index1=s1.lastIndexOf('s');//returns last index of 's' char value  
+        System.out.println(index1);//6  
+        }
+    
+    }  
+```
+
+**charAt()**
+
+- The Java String class charAt() method returns a char value at the given index number.
+
+```java
+public class CharAtExample{  
+    public static void main(String args[]){  
+        String name="javatpoint";  
+        char ch=name.charAt(4);//returns the char value at the 4th index  
+        System.out.println(ch);  
+        }
+    }  
+```
+
+**contains()**
+
+- The Java String class contains() method searches the sequence of characters in this string. It returns true if the sequence of char values is found in this string otherwise returns false.
+
+```java
+class ContainsExample{  
+    public static void main(String args[]){  
+        String name="what do you know about me";  
+        System.out.println(name.contains("do you know"));  //true
+        System.out.println(name.contains("about"));  //true
+        System.out.println(name.contains("hello"));  //false
+}}  
+```
+**startsWith()**
+
+- The Java String class startsWith() method checks if this string starts with the given prefix. It returns true if this string starts with the given prefix; else returns false.
+
+```java
+public class StartsWithExample{    
+    // main method  
+    public static void main(String args[])  {    
+        // input string  
+        String s1="java string split method by javatpoint";    
+        System.out.println(s1.startsWith("ja"));  // true  
+        System.out.println(s1.startsWith("java string"));   // true  
+        System.out.println(s1.startsWith("Java string"));  // false as 'j' and 'J' are different   
+        }  
+        }    
+```
+
+**endsWith()**
+
+- The Java String class endsWith() method checks if this string ends with a given suffix. It returns true if this string ends with the given suffix; else returns false.
+
+```java
+public class EndsWithExample{  
+    public static void main(String args[]){  
+        String s1="java by javatpoint";  
+        System.out.println(s1.endsWith("t"));  //true
+        System.out.println(s1.endsWith("point"));  //true
+        }
+        }  
+```
+
+**toUpperCase()**
+
+- The java string toUpperCase() method returns the string in uppercase letter. In other words, it converts all characters of the string into upper case letter.
+
+```java
+public class StringUpperExample{  
+    public static void main(String args[]){  
+        String s1="hello string";  
+        String s1upper=s1.toUpperCase();  
+        System.out.println(s1upper);  //HELLO STRING
+}}  
+```
+
+**toLowerCase()**
+
+- The java string toLowerCase() method returns the string in lowercase letter. In other words, it converts all characters of the string into lower case letter.
+
+```java
+public class StringLowerExample{  
+    public static void main(String args[]){  
+        String s1="JAVATPOINT HELLO stRIng";  
+        String s1lower=s1.toLowerCase();  
+        System.out.println(s1lower);  //javapoint hello string
+        }
+    }  
+```
+**valueOf**
+
+- The java string valueOf() method converts different types of values into string. By the help of string valueOf() method, you can convert int to string, long to string, boolean to string, character to string, float to string, double to string, object to string and char array to string.
+
+```java
+public class StringValueOfExample{  
+    public static void main(String args[]){  
+        int value=30;  
+        String s1=String.valueOf(value);  
+        System.out.println(s1+10);//concatenating string with 10  - 3010
+        }
+    }  
+```
+
+**toCharArray()**
+
+- The java string toCharArray() method converts this string into character array. It returns a newly created character array, its length is similar to this string and its contents are initialized with the characters of this string.
+
+```java
+public class StringToCharArrayExample{  
+    public static void main(String args[]){  
+        String s1="hello";  
+        char[] ch=s1.toCharArray();  
+        for(int i=0;i<ch.length;i++){  
+            System.out.print(ch[i]);  //hello
+            }  
+        }
+    } 
+
+```
+
+## StringBuffer
+
+- Java StringBuffer class is used to create mutable (modifiable) String objects. The StringBuffer class in Java is the same as String class except it is mutable i.e. it can be changed.
+
+```java
+class StringBufferExample{  
+    public static void main(String args[]){  
+        StringBuffer sb=new StringBuffer("Ashish ");  
+        sb.append("Yadav");//now original string is changed  
+        System.out.println(sb);//prints Ashish Yadav
+        }  
+}  
+```
+
+### Constructors and Methods.
+
+![alt text](image-5.png)
+
+```java
+public class StringBufferDemo{
+    public static void main(String args[]){
+        StringBuffer sb = new StringBuffer("Ashish");//16 is the original capacity of stringbuffer
+        System.out.println(sb.capacity());//16 + 6 = 22 will be the capacity
+
+        StringBuffer sb2 = new StringBuffer(1000);
+        System.out.println(sb2.capacity());//1000 will be printed as we intialized the capacity with 1000 explicityly 
+      
+        System.out.println(sb.append(" Yadav"));
+        System.out.println(sb.delete(2,5));//Ash Yadav
+        System.out.println(sb.deleteCharAt(3));//AshYadav
+        StringBuffer sb3 = new StringBuffer("Ashish");
+        System.out.println(sb.equals(sb3)); //false as equal method is inherited from object and not overriden like string class
+        System.out.println(sb3.reverse());
+        
+    }
+}
+```
+
+## StringBuilder
+
+- Java StringBuilder class is used to create mutable (modifiable) String. The Java StringBuilder class is same as StringBuffer class except that it is non-synchronized. It is available since JDK 1.5.
+
+## Constructors and Method
+
+![alt text](image-6.png)
+
+```java
+public class Test{
+    public static void main(String args[]){
+        StrinBuilder sb = new StringBuilder("Ashish");
+        System.out.println(sb);//all the methods and constructor of StringBuilder is same as StringBuffer only difference is method is non synchronized in StringBuilder
+    }
+}
+```
+
+## Difference between String, StringBuffer and StringBuilder
+
+
+### String
+
+- Storage : Heap Aread and String Constant Pool
+- Object : immutable object
+- Memory : If we change the value of String a lot of times it will allocate more memory.
+- Thread safe : not thread safe
+- Performance : slow
+- Use : if data is not changing frequently
+
+### StringBuffer
+
+- Storage : Heap Area
+- Object : Mutable object
+- Memory : Consumes less memory
+- Thread safe : all methods are synchronized hence it is thread safe
+- Performance : fast as compare to string
+- Use: if data is changing frequently
+
+### StringBuilder
+
+- Storage : Heap Area
+- Object : Mutable Object
+- Memory: consumes less memory
+- Thread safe: all methods are non synchronized method so it is not thread safe
+- Performance : fast as compare to StringBuffer
+- Use: if data is changing frequently
