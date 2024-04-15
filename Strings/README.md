@@ -195,3 +195,229 @@ class Demo{
 ```
 equals() method of String class is used for content comparison i.e it is used to check object value.
 
+## String Class Constructor.
+
+```java
+class String{
+    public String(){}
+    public String(String s){}
+    public String(StringBuffer sb){}
+    public String(StringBuilder sb){}
+    public String(char[] ch){}
+    public String(byte b){}
+}
+```
+
+**Example**
+
+```java
+
+public class StringDemo{
+    public static void main(String args[]){
+        String s1 = new String();//Empty constructor length of this string will be 0
+        System.out.println(s1);
+        String s2 = new String("abc");//2 Object 1 in heap memory and other in SCP
+        System.out.println(s2);
+        StringBuffer sb = new StringBuffer("Rahul");//String Buffer and String Builder create mutable string
+        String s3 = new String(sb);
+        System.out.println(s3);
+        StringBuilder sb2 = new StringBuilder("Krishna");
+        String s4 = new String(sb2);
+        System.out.println(s4);
+        byte[] b = {101, 102, 103, 104};//integer value will be converted into character
+        String s5 = new String(b);
+        System.out.println(s5);
+        char[] ch = {'a','b','c','d','e','f','g','h'};
+        String s6 = new String(ch);
+        System.out.println(s6);
+    }
+}
+```
+
+**Why char array is preffered over string for storing password?**
+
+String objects are immutable in java therefore if a password is stored as a plain text it will be availabe in memory until garabage collector clears it, but string objects literal are stored in String literal pool for re-usability and garbage collection is not applicable in SCP, which is a security threat.
+With an array, you can explicitly wipe the data after you are done with it. You can overwrite the array with anything you like, and the password won't be present anywhere in the system, even before garbage collection.
+
+
+## String class method.
+
+**length()**
+
+- The string length() method counts the number of character in the string and returns it in integer. This method return the length of any string which is equal to the number of 16 bit unicode character.If the string is null it will throw NullPointerException.
+
+```java
+class Test{
+        public static void main(String args[]){
+            String name = "abc";
+            String email = "abc@gmail.com";
+            String password = "abc123";
+            System.out.print(name.length);
+        }
+    }
+```
+**isEmpty()**
+
+- The Java String class isEmpty() method checks if the input string is empty or not. Note that here empty means the number of characters contained in a string is zero.
+
+```java
+public class IsEmptyExample{  
+        public static void main(String args[]){  
+            String s1="";  
+            String s2="javatpoint";  
+            System.out.println(s1.isEmpty());  //true
+            System.out.println(s2.isEmpty());  //false
+    }}  
+```
+
+**trim()**
+ 
+- The Java String class trim() method eliminates leading and trailing spaces. The Unicode value of space character is '\u0020'. The trim() method in Java string checks this Unicode value before and after the string, if it exists then the method removes the spaces and returns the omitted string.
+
+```java
+public class StringTrimExample{  
+        public static void main(String args[]){  
+            String s1="  hello string   ";  
+            System.out.println(s1+"javatpoint");//without trim()  - hello string   javatpoint
+            System.out.println(s1.trim()+"javatpoint");//with trim()  - hello stringjavatpoint
+    }}  
+``` 
+
+**equals()**
+
+- The Java String class equals() method compares the two given strings based on the content of the string. If any character is not matched, it returns false. If all characters are matched, it returns true.
+
+```java
+ public class EqualsExample{  
+        public static void main(String args[]){  
+            String s1="javatpoint";  
+            String s2="javatpoint";  
+            String s3="JAVATPOINT";  
+            String s4="python";  
+            System.out.println(s1.equals(s2));//true because content and case is same  
+            System.out.println(s1.equals(s3));//false because case is not same  
+            System.out.println(s1.equals(s4));//false because content is not same  
+    }}  
+```
+
+**equalsIgnoreCase()**
+
+- The Java String class equalsIgnoreCase() method compares the two given strings on the basis of the content of the string irrespective of the case (lower and upper) of the string. It is just like the equals() method but doesn't check the case sensitivity. If any character is not matched, it returns false, else returns true
+
+```java
+public class EqualsIgnoreCaseExample{  
+        public static void main(String args[]){  
+            String s1="javatpoint";  
+            String s2="javatpoint";  
+            String s3="JAVATPOINT";  
+            String s4="python";  
+            System.out.println(s1.equalsIgnoreCase(s2));//true because content and case both are same  
+            System.out.println(s1.equalsIgnoreCase(s3));//true because case is ignored  
+            System.out.println(s1.equalsIgnoreCase(s4));//false because content is not same  
+            }}  
+```
+**compareTo()**
+
+- The Java String class compareTo() method compares the given string with the current string lexicographically. It returns a positive number, negative number, or 0.
+
+- It compares strings on the basis of the Unicode value of each character in the strings.
+
+- If the first string is lexicographically greater than the second string, it returns a positive number (difference of character value). If the first string is less than the second string lexicographically, it returns a negative number, and if the first string is lexicographically equal to the second string, it returns 0.
+
+```java
+public class CompareToExample{  
+        public static void main(String args[]){  
+            String s1="hello";  
+            String s2="hello";  
+            String s3="meklo";  
+            String s4="hemlo";  
+            String s5="flag";  
+            System.out.println(s1.compareTo(s2));//0 because both are equal  
+            System.out.println(s1.compareTo(s3));//-5 because "h" is 5 times lower than "m"  
+            System.out.println(s1.compareTo(s4));//-1 because "l" is 1 times lower than "m"  
+            System.out.println(s1.compareTo(s5));//2 because "h" is 2 times greater than "f"  
+            }
+            }   
+```
+
+**concat()**
+
+- The Java String class concat() method combines specified string at the end of this string. It returns a combined string. It is like appending another string.
+
+```java
+public class ConcatExample{    
+    public static void main(String args[]){    
+        String s1="java string";    
+        // The string s1 does not get changed, even though it is invoking the method      
+        // concat(), as it is immutable. Therefore, the explicit assignment is required here.  
+        s1.concat("is immutable");    
+        System.out.println(s1);    //java string
+        s1=s1.concat(" is immutable so assign it explicitly");    //java string is immutable so assign it explicitly
+        System.out.println(s1);    
+        }}    
+```
+
+**join()**
+
+- The Java String class join() method returns a string joined with a given delimiter. In the String join() method, the delimiter is copied for each element. The join() method is included in the Java string since JDK 1.8.
+
+**Syntax**
+
+```
+public static String join(CharSequence delimiter, CharSequence... elements)       
+public static String join(CharSequence delimiter, Iterable<? extends CharSequence> elements)
+```
+
+```java
+public class StringJoinExample{  
+    public static void main(String args[]){  
+        String joinString1=String.join("-","welcome","to","javatpoint");  
+        System.out.println(joinString1);  
+        }}  
+```
+
+**substring()**
+
+- The Java String class substring() method returns a part of the string.
+
+- We pass beginIndex and endIndex number position in the Java substring method where beginIndex is inclusive, and endIndex is exclusive. In  other words, the beginIndex starts from 0, whereas the endIndex starts from 1.
+
+```java
+public class SubstringExample{  
+public static void main(String args[]){  
+String s1="javatpoint";  
+System.out.println(s1.substring(2,4));//returns va  
+System.out.println(s1.substring(2));//returns vatpoint  
+}}  
+```
+
+**replace(),replaceFirst(), replaceAll()**
+
+```
+public String replace(char oldChar, char newChar)    
+public String replace(CharSequence target, CharSequence replacement)  
+```
+
+- The Java String class replace() method returns a string replacing all the old char or CharSequence to new char or CharSequence.
+
+```
+replaceFirst(String regex, String replacement)
+```
+- This method replaces the first occurrence of the specified regular expression (regex) in the string with the replacement.
+
+```
+public String replaceAll(String regex, String replacement)  
+```
+- The Java String class replaceAll() method returns a string replacing all the sequence of characters matching regex and replacement string.
+
+```java
+public class Test{
+    public static void main(String args[]){
+        String s1 = "This is demo";
+        System.out.println(s1.replace("is","was"));//Thwas was demo
+        System.out.println(s1.replaceFirst("is","was"));//Thwas is demo
+        System.out.println(s1.replaceAll("is","was"));//Thwas was demo
+        
+    }
+}
+```
