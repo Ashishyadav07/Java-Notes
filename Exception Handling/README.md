@@ -343,7 +343,7 @@ class ConnectionCloseDemo{
 
 - We can use multiple catch block with one try block but we can use single finally block with one try block not multiple.
 - The statement present in the finally block execute even if the try block contains control transfer statements(jump statement) like return break or continue.
-- Cases where try block can't be used.
+- Cases where finally block can't be used.
   - Using of the system.exit() method. In this case JVM will get shut down and finally block will not get executed.
   - Causing a fatal error that causes the process to abort. For example - Out of memory error.
   - Due to an exception arising in the finally and we are not handling it.
