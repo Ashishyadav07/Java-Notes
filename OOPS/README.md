@@ -2,7 +2,7 @@
 
 - Object Oriented Programming System/Structure.
 - OOPS is a Programming paradigm or methodology.
-- Paradigm can also be termed as method to solve some problem or to do some tasks. Programming paradigm is an approach to solve problem using programming language or also we can say it is a method to solve a problem using tools and technique that are available to us following some approach.
+- OOPs (Object-Oriented Programming System) is a programming paradigm based on the concept of "objects", which can contain data (attributes or properties) and code (methods or functions). It is used to structure a software program into simple, reusable pieces of code blueprints (usually called classes), which are then used to create individual instances of objects.
 - Programming paradigm are of different types.
   - Object Oriented paradigm.
   - Procedural paradigm.
