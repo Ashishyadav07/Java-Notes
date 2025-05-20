@@ -408,8 +408,7 @@ class Student {
 
 ```
 
-Student **Has A** name(Has a relation)\
-Student **Has A** roll_no(Has a relation)
+Student **Has A** department(Has a relation)
 
 ```java
 class Engine{
