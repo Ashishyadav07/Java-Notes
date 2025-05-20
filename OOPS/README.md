@@ -372,10 +372,40 @@ Car Is A Vehicle (Is A relationship)
 ### Association
 
 ```java
-class Student{
-  String name;
-  int roll_no;
+class Department {
+    String deptName;
+
+    Department(String deptName) {
+        this.deptName = deptName;
+    }
+
+    void showDept() {
+        System.out.println("Department: " + deptName);
+    }
 }
+
+class Student {
+    String name;
+    Department dept;  // Aggregation (Student has-a Department)
+
+    Student(String name, Department dept) {
+        this.name = name;
+        this.dept = dept;
+    }
+
+    void showDetails() {
+        System.out.println("Student: " + name);
+        dept.showDept();  // using Department's method
+    }
+
+    public static void main(String[] args) {
+        Department d = new Department("Computer Science");  // created separately
+        Student s = new Student("Ashish", d);  // passed as reference
+
+        s.showDetails();
+    }
+}
+
 ```
 
 Student **Has A** name(Has a relation)\
