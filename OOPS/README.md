@@ -27,7 +27,7 @@
 
 }
 
-\*A class can have method, constructor, variable, blocks and nested class.
+- A class can have method, constructor, variable, blocks and nested class.
 
 ## Method
 
