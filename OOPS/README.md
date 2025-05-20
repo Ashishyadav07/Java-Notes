@@ -411,12 +411,32 @@ class Student {
 Student **Has A** department(Has a relation)
 
 ```java
-class Engine{
+class Engine {
+    void start() {
+        System.out.println("Engine is started.");
+    }
+}
 
+class Car {
+    private Engine engine;  // Car "has-a" Engine (composition)
+
+    public Car() {
+        engine = new Engine();  // Car creates the Engine
+    }
+
+    public void startCar() {
+        engine.start();  // Use Engine's method
+        System.out.println("Car has started.");
+    }
 }
-class Car{
-  Engine e = new Engine();
+
+public class Main {
+    public static void main(String[] args) {
+        Car myCar = new Car();  // Creating Car also creates Engine
+        myCar.startCar();
+    }
 }
+
 
 ```
 
