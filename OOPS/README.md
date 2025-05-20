@@ -456,7 +456,7 @@ Composition is a stronger form of association where one class, the composite, co
 
 ## Polymorphism
 
-- Polymorphism in Java is a concept by which we can perform a single action in different ways.
+- Polymorphism in Java is the ability of an object to take many forms, allowing a single method or action to behave differently based on the context.
 - The word "poly" means many and "morphs" means forms.
 
 ### Types of polymorphism
